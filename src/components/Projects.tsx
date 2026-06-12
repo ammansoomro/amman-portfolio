@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Section from "./Section";
 import { projects, type Project } from "@/data/projects";
-import { CloseIcon, ExternalLinkIcon, GitHubIcon } from "./Icons";
+import { ChromeIcon, CloseIcon, ExternalLinkIcon, GitHubIcon } from "./Icons";
 
 const FEATURED_COUNT = 3;
 const swatchColors = ["#663af3", "#e46d4c", "#027dea", "#269684"];
@@ -75,6 +75,16 @@ function ProjectModal({
               <ExternalLinkIcon /> Live demo
             </a>
           )}
+          {project.storeLink && (
+            <a
+              href={project.storeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link"
+            >
+              <ChromeIcon /> Chrome Web Store
+            </a>
+          )}
         </div>
         <div className="modal-gallery">
           {project.screenshots.map((src) => (
@@ -138,6 +148,16 @@ function FeaturedShowcase({
             className="project-link"
           >
             <ExternalLinkIcon /> Live demo
+          </a>
+        )}
+        {project.storeLink && (
+          <a
+            href={project.storeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-link"
+          >
+            <ChromeIcon /> Chrome Web Store
           </a>
         )}
       </div>
@@ -245,6 +265,17 @@ export default function Projects() {
                     onClick={(e) => e.stopPropagation()}
                   >
                     <ExternalLinkIcon size={15} />
+                  </a>
+                )}
+                {project.storeLink && (
+                  <a
+                    href={project.storeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${project.title} on the Chrome Web Store`}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <ChromeIcon size={15} />
                   </a>
                 )}
                 <span className="archive-arrow">→</span>

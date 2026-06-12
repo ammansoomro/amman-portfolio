@@ -5,6 +5,7 @@ export interface Project {
   technologies: string[];
   codeLink: string;
   projectLink?: string;
+  storeLink?: string;
   cover: string;
   screenshots: string[];
 }
@@ -50,6 +51,33 @@ export const projects: Project[] = [
       "/works/investment-tracker-13.png",
       "/works/investment-tracker-14.png",
       "/works/investment-tracker-15.png",
+    ],
+  },
+  {
+    title: "GitHub Defect Marker",
+    description:
+      "A Chrome extension that helps reviewers classify defects while leaving review comments on GitHub pull requests. Tick Mark as Defect in any PR comment box, pick a Severity (Major, Minor, Cosmetic) and a Defect Type (Missing, Extra, Risk-prone, Ambiguous, Inconsistent, Improvement, Factually Incorrect) via one-click pills, and a machine-readable label (#Major:Missing, #Cosmetic:Improvement, ...) is inserted at the start of the comment — with submission blocked until the label is complete and present. Features a live label preview chip, native GitHub theming via Primer CSS variables (light, dark, dark-dimmed, and high-contrast), full accessibility with aria-live validation and reduced-motion support, and zero data collection — no background worker, no network requests, no storage, and zero Chrome permissions. Published on the Chrome Web Store, with a fully static marketing landing page built with Next.js 15 (App Router), React 19, and Tailwind CSS v4.",
+    tags: ["Extension", "Next"],
+    technologies: [
+      "JavaScript",
+      "Chrome Extension (Manifest V3)",
+      "HTML5",
+      "CSS3",
+      "GitHub Primer CSS",
+      "Next.js 15",
+      "React 19",
+      "Tailwind CSS v4",
+      "lucide-react",
+    ],
+    codeLink: "https://github.com/ammansoomro/github-defect-marker",
+    projectLink: "https://defect-marker.vercel.app/",
+    storeLink:
+      "https://chromewebstore.google.com/detail/github-defect-marker/jjdoipaabbleocomabmeleioohlikdlf",
+    cover: "/works/Github-Defect-Marker-1.png",
+    screenshots: [
+      "/works/Github-Defect-Marker-1.png",
+      "/works/Github-Defect-Marker-2.png",
+      "/works/Github-Defect-Marker-3.png",
     ],
   },
   {
