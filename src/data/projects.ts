@@ -120,6 +120,25 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: "Cluedo Companion",
+    description:
+      "A premium digital detective notes sheet for the board game Cluedo — track clues, eliminate suspects, and solve the mystery. Features an interactive deduction grid where each cell cycles through five states (check, cross, maybe, self-held), support for 2-6 players with renamable columns, per-card notes, and a free-form detective journal. The board is analyzed live: cards held by any player are eliminated from the murder envelope, each category shows remaining candidates and flags the answer when exactly one remains, and an overall completion meter tracks progress. Multiple investigations are managed as persistent case files (saved to localStorage via Zustand persist), and any case can be shared with friends through a compact URL-safe encoded link. Wrapped in a detective-themed dark UI with Cinzel, Cormorant Garamond, and Special Elite typography, Framer Motion animations, and optional sound effects.",
+    tags: ["Next"],
+    technologies: [
+      "Next.js",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Zustand",
+      "Framer Motion",
+      "lucide-react",
+    ],
+    codeLink: "https://github.com/ammansoomro/cluedo-companion",
+    projectLink: "https://cluedo-companion.vercel.app",
+    cover: "/works/cluedo-companion.png",
+    screenshots: ["/works/cluedo-companion.png"],
+  },
+  {
     title: "Prompt-O-Phobia",
     description:
       "Empower your creativity using Next.js. Shape unique prompts for advanced AI interaction, revolutionizing AI-driven experiences. Your innovation knows no bounds with this platform. Share and redefine possibilities today!",

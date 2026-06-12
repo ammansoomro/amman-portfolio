@@ -6,7 +6,7 @@ import Section from "./Section";
 import { projects, type Project } from "@/data/projects";
 import { ChromeIcon, CloseIcon, ExternalLinkIcon, GitHubIcon } from "./Icons";
 
-const FEATURED_COUNT = 3;
+const FEATURED_COUNT = 4;
 const swatchColors = ["#663af3", "#e46d4c", "#027dea", "#269684"];
 
 function ProjectModal({
