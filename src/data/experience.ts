@@ -75,5 +75,5 @@ export const links = {
   whatsapp:
     "https://api.whatsapp.com/send?phone=%2B923138501180&text&app_absent=0",
   resume:
-    "https://drive.google.com/file/d/1EMX00yfqcMmjhTWRDmrCTNys_iOUeRxu/view?usp=sharing",
+    "https://drive.google.com/file/d/1ZVMRGqn_VkctbFBCQpC7TRzfB3TjvNZU/view?usp=sharing",
 };
