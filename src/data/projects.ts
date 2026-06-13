@@ -12,7 +12,7 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Investment Tracker",
+    title: "Wealth Deck",
     description:
       "A comprehensive full-stack web application for tracking and managing your investment portfolio across multiple asset classes. Built with modern technologies to provide real-time portfolio insights, beautiful visualizations, and intuitive user experience. Features multi-asset tracking including cryptocurrencies (BTC, ETH, SOL, XRP, and more), Pakistan Stock Exchange (PSX) stocks, mutual funds, silver holdings (bars, coins, tola), and VPS (Voluntary Pension Scheme) funds. Includes a real-time portfolio overview with interactive charts, profit/loss tracking, asset breakdown with performance metrics, salary allocation tools, investment calculator, SIP calculator, and automatic crypto price updates via CoinGecko API.",
     tags: ["React", "Node"],
@@ -33,24 +33,12 @@ export const projects: Project[] = [
       "CoinGecko API",
     ],
     codeLink: "https://github.com/ammansoomro/investment-tracker",
-    cover: "/works/investment-tracker.png",
+    projectLink: "https://wealthdeck.vercel.app",
+    cover: "/works/Wealth-Deck-01.png",
     screenshots: [
-      "/works/investment-tracker.png",
-      "/works/investment-tracker-1.png",
-      "/works/investment-tracker-2.png",
-      "/works/investment-tracker-3.png",
-      "/works/investment-tracker-4.png",
-      "/works/investment-tracker-5.png",
-      "/works/investment-tracker-6.png",
-      "/works/investment-tracker-7.png",
-      "/works/investment-tracker-8.png",
-      "/works/investment-tracker-9.png",
-      "/works/investment-tracker-10.png",
-      "/works/investment-tracker-11.png",
-      "/works/investment-tracker-12.png",
-      "/works/investment-tracker-13.png",
-      "/works/investment-tracker-14.png",
-      "/works/investment-tracker-15.png",
+      "/works/Wealth-Deck-01.png",
+      "/works/Wealth-Deck-02.png",
+      "/works/Wealth-Deck-03.png",
     ],
   },
   {
