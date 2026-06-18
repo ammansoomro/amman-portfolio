@@ -3,11 +3,25 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Section from "./Section";
-import { projects, type Project } from "@/data/projects";
+import {
+  projects,
+  type Project,
+  type ProjectCategory,
+} from "@/data/projects";
 import { ChromeIcon, CloseIcon, ExternalLinkIcon, GitHubIcon } from "./Icons";
 
-const FEATURED_COUNT = 4;
+const FEATURED_COUNT = 3;
 const swatchColors = ["#663af3", "#e46d4c", "#027dea", "#269684"];
+
+const CATEGORY_LABELS: Record<ProjectCategory, string> = {
+  extension: "Extension",
+  "mini-app": "Mini App",
+};
+
+function CategoryBadge({ category }: { category?: ProjectCategory }) {
+  if (!category) return null;
+  return <span className={`project-badge project-badge-${category}`}>{CATEGORY_LABELS[category]}</span>;
+}
 
 function ProjectModal({
   project,
@@ -117,7 +131,10 @@ function FeaturedShowcase({
       <span className="showcase-index">
         Project {String(index + 1).padStart(2, "0")}
       </span>
-      <h3 className="showcase-title">{project.title}</h3>
+      <h3 className="showcase-title">
+        {project.title}
+        <CategoryBadge category={project.category} />
+      </h3>
       <p className="showcase-desc">{project.description}</p>
       <div className="showcase-tech">
         {project.technologies.slice(0, 8).map((tech) => (
@@ -240,7 +257,10 @@ export default function Projects() {
                 {String(FEATURED_COUNT + i + 1).padStart(2, "0")}
               </span>
               <span className="archive-main">
-                <span className="archive-title">{project.title}</span>
+                <span className="archive-title">
+                  {project.title}
+                  <CategoryBadge category={project.category} />
+                </span>
                 <span className="archive-sub">{project.description}</span>
               </span>
               <span className="archive-tech">

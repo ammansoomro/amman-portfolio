@@ -1,3 +1,5 @@
+export type ProjectCategory = "extension" | "mini-app";
+
 export interface Project {
   title: string;
   description: string;
@@ -8,6 +10,7 @@ export interface Project {
   storeLink?: string;
   cover: string;
   screenshots: string[];
+  category?: ProjectCategory;
 }
 
 export const projects: Project[] = [
@@ -39,33 +42,6 @@ export const projects: Project[] = [
       "/works/Wealth-Deck-01.png",
       "/works/Wealth-Deck-02.png",
       "/works/Wealth-Deck-03.png",
-    ],
-  },
-  {
-    title: "GitHub Defect Marker",
-    description:
-      "A Chrome extension that helps reviewers classify defects while leaving review comments on GitHub pull requests. Tick Mark as Defect in any PR comment box, pick a Severity (Major, Minor, Cosmetic) and a Defect Type (Missing, Extra, Risk-prone, Ambiguous, Inconsistent, Improvement, Factually Incorrect) via one-click pills, and a machine-readable label (#Major:Missing, #Cosmetic:Improvement, ...) is inserted at the start of the comment — with submission blocked until the label is complete and present. Features a live label preview chip, native GitHub theming via Primer CSS variables (light, dark, dark-dimmed, and high-contrast), full accessibility with aria-live validation and reduced-motion support, and zero data collection — no background worker, no network requests, no storage, and zero Chrome permissions. Published on the Chrome Web Store, with a fully static marketing landing page built with Next.js 15 (App Router), React 19, and Tailwind CSS v4.",
-    tags: ["Extension", "Next"],
-    technologies: [
-      "JavaScript",
-      "Chrome Extension (Manifest V3)",
-      "HTML5",
-      "CSS3",
-      "GitHub Primer CSS",
-      "Next.js 15",
-      "React 19",
-      "Tailwind CSS v4",
-      "lucide-react",
-    ],
-    codeLink: "https://github.com/ammansoomro/github-defect-marker",
-    projectLink: "https://defect-marker.vercel.app/",
-    storeLink:
-      "https://chromewebstore.google.com/detail/github-defect-marker/jjdoipaabbleocomabmeleioohlikdlf",
-    cover: "/works/Github-Defect-Marker-1.png",
-    screenshots: [
-      "/works/Github-Defect-Marker-1.png",
-      "/works/Github-Defect-Marker-2.png",
-      "/works/Github-Defect-Marker-3.png",
     ],
   },
   {
@@ -108,6 +84,34 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: "GitHub Defect Marker",
+    description:
+      "A Chrome extension that helps reviewers classify defects while leaving review comments on GitHub pull requests. Tick Mark as Defect in any PR comment box, pick a Severity (Major, Minor, Cosmetic) and a Defect Type (Missing, Extra, Risk-prone, Ambiguous, Inconsistent, Improvement, Factually Incorrect) via one-click pills, and a machine-readable label (#Major:Missing, #Cosmetic:Improvement, ...) is inserted at the start of the comment — with submission blocked until the label is complete and present. Features a live label preview chip, native GitHub theming via Primer CSS variables (light, dark, dark-dimmed, and high-contrast), full accessibility with aria-live validation and reduced-motion support, and zero data collection — no background worker, no network requests, no storage, and zero Chrome permissions. Published on the Chrome Web Store, with a fully static marketing landing page built with Next.js 15 (App Router), React 19, and Tailwind CSS v4.",
+    tags: ["Extension", "Next"],
+    technologies: [
+      "JavaScript",
+      "Chrome Extension (Manifest V3)",
+      "HTML5",
+      "CSS3",
+      "GitHub Primer CSS",
+      "Next.js 15",
+      "React 19",
+      "Tailwind CSS v4",
+      "lucide-react",
+    ],
+    codeLink: "https://github.com/ammansoomro/github-defect-marker",
+    projectLink: "https://defect-marker.vercel.app/",
+    storeLink:
+      "https://chromewebstore.google.com/detail/github-defect-marker/jjdoipaabbleocomabmeleioohlikdlf",
+    cover: "/works/Github-Defect-Marker-1.png",
+    screenshots: [
+      "/works/Github-Defect-Marker-1.png",
+      "/works/Github-Defect-Marker-2.png",
+      "/works/Github-Defect-Marker-3.png",
+    ],
+    category: "extension",
+  },
+  {
     title: "Cluedo Companion",
     description:
       "A premium digital detective notes sheet for the board game Cluedo — track clues, eliminate suspects, and solve the mystery. Features an interactive deduction grid where each cell cycles through five states (check, cross, maybe, self-held), support for 2-6 players with renamable columns, per-card notes, and a free-form detective journal. The board is analyzed live: cards held by any player are eliminated from the murder envelope, each category shows remaining candidates and flags the answer when exactly one remains, and an overall completion meter tracks progress. Multiple investigations are managed as persistent case files (saved to localStorage via Zustand persist), and any case can be shared with friends through a compact URL-safe encoded link. Wrapped in a detective-themed dark UI with Cinzel, Cormorant Garamond, and Special Elite typography, Framer Motion animations, and optional sound effects.",
@@ -125,6 +129,7 @@ export const projects: Project[] = [
     projectLink: "https://cluedo-companion.vercel.app",
     cover: "/works/cluedo-companion.png",
     screenshots: ["/works/cluedo-companion.png"],
+    category: "mini-app",
   },
   {
     title: "Prompt-O-Phobia",
@@ -134,8 +139,12 @@ export const projects: Project[] = [
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "AI Integration"],
     codeLink: "https://github.com/ammansoomro/prompt-o-phobia",
     projectLink: "https://prompt-o-phobia.vercel.app/",
-    cover: "/works/promptOphobia.jpg",
-    screenshots: ["/works/promptOphobia.jpg"],
+    cover: "/works/prompt-o-phobia-1.png",
+    screenshots: [
+      "/works/prompt-o-phobia-1.png",
+      "/works/prompt-o-phobia-2.png",
+      "/works/prompt-o-phobia-3.png",
+    ],
   },
   {
     title: "Arcade Vault",
@@ -181,23 +190,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "GameWares Hub",
-    description:
-      "React Native app featuring user authentication, displaying a variety of PlayStation accessories and games. Users can browse, add items to a mock shopping cart, and simulate a purchase experience.",
-    tags: ["Native", "React"],
-    technologies: ["React Native", "JavaScript", "Authentication", "State Management"],
-    codeLink: "https://github.com/ammansoomro/SMD_Project",
-    cover: "/works/GameWaresHub.jpg",
-    screenshots: [
-      "/works/GameWaresHub.jpg",
-      "/works/GameWaresHub-1.jpg",
-      "/works/GameWaresHub-2.png",
-      "/works/GameWaresHub-3.png",
-      "/works/GameWaresHub-4.png",
-      "/works/GameWaresHub-5.png",
-    ],
-  },
-  {
     title: "Shadow Sensei",
     description:
       "A web-based, Student Management System built using HTML, CSS, PHP, and JavaScript that would store all the data about the students and their courses on a PHP MySQL server.",
@@ -212,31 +204,5 @@ export const projects: Project[] = [
       "/works/ShadowSensei-3.jpg",
       "/works/ShadowSensei-5.jpg",
     ],
-  },
-  {
-    title: "Lavender Logs",
-    description:
-      "A web-based, Blog Post Management System developed using Php, HTML, and JS including MySQL Database as a backend to store all the data. The system consists of different dashboards based on user-role.",
-    tags: ["Php"],
-    technologies: ["PHP", "MySQL", "HTML5", "CSS3", "JavaScript", "Role-Based Access"],
-    codeLink: "https://github.com/ammansoomro/LavenderLogs",
-    cover: "/works/LavenderLogs.jpg",
-    screenshots: [
-      "/works/LavenderLogs.jpg",
-      "/works/LavenderLogs-2.png",
-      "/works/LavenderLogs-3.png",
-      "/works/LavenderLogs-4.png",
-      "/works/LavenderLogs-5.png",
-    ],
-  },
-  {
-    title: "Grade Calc",
-    description:
-      "A GPA calculator web application built using HTML, CSS, and JavaScript. The application allows users to calculate their semester and cumulative GPAs based on the grades they received in their courses — semester GPA from credit hours and grades for up to 8 courses, and cumulative GPA for up to 8 semesters, with a simple, easy-to-use interface and automatic calculation.",
-    tags: ["HTML"],
-    technologies: ["HTML5", "CSS3", "JavaScript"],
-    codeLink: "https://github.com/ammansoomro/GradeCalc",
-    cover: "/works/GradeCalc.jpg",
-    screenshots: ["/works/GradeCalc.jpg", "/works/GradeCalc-1.jpg"],
   },
 ];

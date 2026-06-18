@@ -53,6 +53,7 @@ export const experiences: ExperienceEntry[] = [
 
 export const skills = [
   { name: "React", logo: "/logos/react.svg" },
+  { name: "Angular", logo: "/logos/angular.svg" },
   { name: "TypeScript", logo: "/logos/typescript.svg" },
   { name: "Node.js", logo: "/logos/nodejs.svg" },
   { name: "Tailwind", logo: "/logos/tailwind.svg" },
@@ -62,6 +63,7 @@ export const skills = [
   { name: "JavaScript", logo: "/logos/javascript.svg" },
   { name: "Prisma", logo: "/logos/prisma.svg" },
   { name: "Java", logo: "/logos/java.svg" },
+  { name: "Spring Boot", logo: "/logos/spring.svg" },
   { name: "MySQL", logo: "/logos/mysql.svg" },
   { name: "Python", logo: "/logos/python.svg" },
   { name: "Git", logo: "/logos/git.svg" },
