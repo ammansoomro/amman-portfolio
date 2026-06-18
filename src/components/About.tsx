@@ -100,10 +100,6 @@ export default function About() {
             personal projects, and relaxing with some PlayStation gaming.
           </p>
           <p>Thanks for stopping by!</p>
-          <div className="about-signature">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/signature_light.png" alt="Amman Soomro signature" />
-          </div>
         </div>
       </div>
     </Section>

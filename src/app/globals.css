@@ -580,17 +580,6 @@ img {
   border-color: var(--color-frost-link);
 }
 
-.about-signature {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: var(--spacing-8);
-}
-
-.about-signature img {
-  width: 180px;
-  opacity: 0.85;
-}
-
 /* Subtle stat strip — quiet metrics divided by hairlines, no heavy cards */
 .stat-row {
   display: grid;
