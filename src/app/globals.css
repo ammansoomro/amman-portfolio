@@ -591,99 +591,43 @@ img {
   opacity: 0.85;
 }
 
+/* Subtle stat strip — quiet metrics divided by hairlines, no heavy cards */
 .stat-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-16);
-  margin-bottom: var(--spacing-48);
+  max-width: 820px;
+  margin: 0 auto var(--spacing-48);
+  border-top: 1px solid rgba(186, 215, 247, 0.08);
+  border-bottom: 1px solid rgba(186, 215, 247, 0.08);
 }
 
 .stat-card {
   position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  background: var(--surface-plate-deep);
-  border-radius: var(--radius-cards);
-  box-shadow: var(--shadow-hairline-faint);
-  padding: var(--spacing-24);
+  padding: var(--spacing-20) var(--spacing-24);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-8);
+  gap: 2px;
   text-align: left;
-  transition:
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.28s ease;
 }
 
-/* per-card accent */
-.stat-card:nth-child(1) {
-  --stat-accent: var(--color-electric-iris);
-}
-.stat-card:nth-child(2) {
-  --stat-accent: var(--color-ember);
-}
-.stat-card:nth-child(3) {
-  --stat-accent: var(--color-azure);
-}
-.stat-card:nth-child(4) {
-  --stat-accent: var(--color-cipher-mint);
-}
-
-/* top accent rule */
-.stat-card::before {
+.stat-card:not(:last-child)::after {
   content: "";
   position: absolute;
-  inset: 0 0 auto 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--stat-accent), transparent 75%);
-  opacity: 0.85;
-}
-
-/* soft corner glow */
-.stat-card::after {
-  content: "";
-  position: absolute;
-  top: -48px;
-  right: -48px;
-  width: 120px;
-  height: 120px;
-  z-index: -1;
-  border-radius: var(--radius-pills);
-  background: radial-gradient(circle, var(--stat-accent), transparent 68%);
-  opacity: 0.1;
-  transition: opacity 0.28s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    var(--shadow-hairline),
-    rgba(6, 6, 14, 0.6) 0px 18px 36px 0px;
-}
-
-.stat-card:hover::after {
-  opacity: 0.22;
-}
-
-.stat-index {
-  font-family: var(--font-mono), monospace;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  font-feature-settings: "tnum";
-  color: var(--stat-accent);
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  height: 56%;
+  width: 1px;
+  background: rgba(186, 215, 247, 0.08);
 }
 
 .stat-value {
   font-family: var(--font-display), ui-sans-serif, sans-serif;
-  font-size: clamp(28px, 3.2vw, 40px);
+  font-size: clamp(20px, 2.4vw, 26px);
   font-weight: 500;
-  line-height: 1.05;
+  line-height: 1.1;
   letter-spacing: -0.02em;
-  background: var(--gradient-blueprint-glow);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-glacier);
 }
 
 .stat-label {
@@ -696,6 +640,11 @@ img {
 @media (max-width: 760px) {
   .stat-row {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* hide the vertical divider at the end of each 2-col row */
+  .stat-card:nth-child(2n)::after {
+    display: none;
   }
 }
 

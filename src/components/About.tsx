@@ -19,11 +19,8 @@ export default function About() {
       }
     >
       <div className="stat-row">
-        {stats.map((stat, i) => (
+        {stats.map((stat) => (
           <div key={stat.label} className="stat-card">
-            <span className="stat-index">
-              {String(i + 1).padStart(2, "0")}
-            </span>
             <span className="stat-value">{stat.value}</span>
             <span className="stat-label">{stat.label}</span>
           </div>
