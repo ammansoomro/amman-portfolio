@@ -2,6 +2,7 @@ export interface ExperienceEntry {
   role: string;
   company: string;
   companyUrl?: string;
+  logo: string;
   tenure: string;
   descriptions: string[];
 }
@@ -11,6 +12,7 @@ export const experiences: ExperienceEntry[] = [
     role: "SDE II",
     company: "Matrix Systems",
     companyUrl: "https://matrix.com.pk/",
+    logo: "/logos/mstrix-logo.webp",
     tenure: "May 2025 — Present",
     descriptions: [
       "Developed and enhanced critical modules for a large-scale wealth management and portfolio optimization platform, utilizing Angular, TypeScript, Java, and Oracle SQL to deliver enterprise-grade solutions processing millions of portfolio transactions for financial institutions.",
@@ -23,6 +25,7 @@ export const experiences: ExperienceEntry[] = [
     role: "Software Engineer",
     company: "Techlogix",
     companyUrl: "https://www.techlogix.com/",
+    logo: "/logos/Techlogix-Logo.png",
     tenure: "Jun 2023 — Apr 2025",
     descriptions: [
       "Built and enhanced a large-scale digital banking application, utilizing ReactJS, KnockoutJS, JavaScript, Java, Jenkins, and Oracle SQL to deliver a seamless experience for over 2 million users.",
@@ -39,6 +42,7 @@ export const experiences: ExperienceEntry[] = [
     role: "Freelance Developer",
     company: "Fiverr (Level 2 Seller)",
     companyUrl: "https://www.fiverr.com/",
+    logo: "/logos/fiver-logo.png",
     tenure: "Jan 2021 — Dec 2023",
     descriptions: [
       "Completed 50+ orders with consistent 5-star ratings, helping clients worldwide with high-quality, reliable solutions tailored to their needs.",
