@@ -13,8 +13,8 @@ export default function Navbar() {
   return (
     <header className="nav">
       <div className="nav-inner">
-        <a href="#home" className="nav-brand">
-          amman<span>.</span>soomro
+        <a href="#home" className="nav-brand" aria-label="Amman Soomro — home">
+          A<span>.</span>
         </a>
         <nav className="nav-links">
           {navItems.map((item) => (

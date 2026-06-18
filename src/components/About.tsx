@@ -1,7 +1,7 @@
 import Section from "./Section";
 
 const stats = [
-  { value: "2.5+", label: "Years of experience" },
+  { value: "3+", label: "Years of experience" },
   { value: "2M+", label: "Users served in production" },
   { value: "50+", label: "Freelance projects delivered" },
   { value: "3.5", label: "CGPA · Dean's & Rector's List" },
@@ -19,8 +19,11 @@ export default function About() {
       }
     >
       <div className="stat-row">
-        {stats.map((stat) => (
+        {stats.map((stat, i) => (
           <div key={stat.label} className="stat-card">
+            <span className="stat-index">
+              {String(i + 1).padStart(2, "0")}
+            </span>
             <span className="stat-value">{stat.value}</span>
             <span className="stat-label">{stat.label}</span>
           </div>
@@ -31,7 +34,7 @@ export default function About() {
           <p>Hi, I&apos;m Amman —</p>
           <p>
             A Software Engineer with{" "}
-            <a href="#experience">2.5 years of experience</a> in full-stack
+            <a href="#experience">3 years of experience</a> in full-stack
             development. I enjoy building high-performance applications that
             make an impact.
           </p>

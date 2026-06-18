@@ -69,7 +69,7 @@ function TerminalCard() {
             {"  "}
             <span className="tok-key">experience</span>
             <span className="tok-punc">: </span>
-            <span className="tok-str">&quot;2.5+ years&quot;</span>
+            <span className="tok-str">&quot;3+ years&quot;</span>
             <span className="tok-punc">,</span>
           </span>
           <span className="ln">
