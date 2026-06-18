@@ -1,4 +1,4 @@
-export type ProjectCategory = "extension" | "mini-app";
+export type ProjectCategory = "extension" | "mini-app" | "tool";
 
 export interface Project {
   title: string;
@@ -43,6 +43,33 @@ export const projects: Project[] = [
       "/works/Wealth-Deck-02.png",
       "/works/Wealth-Deck-03.png",
     ],
+  },
+  {
+    title: "DB Mirror — Web Edition",
+    description:
+      "A refined, browser-based tool for comparing the schema and data of two Microsoft SQL Server databases — a Next.js rewrite of the original PyQt6 desktop tool, reimagined as a fast web app with a guided four-step flow (Connect → Databases → Tables → Compare), live streaming progress, and one-click exports. The stateless comparison engine discovers base tables on both sides and intersects them, performs a schema diff over INFORMATION_SCHEMA.COLUMNS (tables/columns present on one side only, plus type mismatches), and runs a per-table data diff: it looks up the real primary key from INFORMATION_SCHEMA.KEY_COLUMN_USAGE to match rows into source-only, target-only and changed (per-column) sets, falling back to a multiset diff on the normalized row when no PK exists. All values are normalized to strings (dates → ISO, buffers → hex) so 1 vs 1.0 never registers as a false difference, volatile columns are excluded, and tables over 100k rows are flagged as sampled. Each table's result streams over Server-Sent Events as it completes, and reports export to self-contained HTML, CSV, or JSON. Comparison is strictly read-only, identifiers are bracket-escaped, values use bound parameters, and credentials are entered per session and never persisted — with a demo mode to explore the full UI without a live database.",
+    tags: ["Tool", "Next"],
+    technologies: [
+      "Next.js 15",
+      "React 19",
+      "TypeScript",
+      "mssql (tedious)",
+      "SQL Server",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Zustand",
+      "Server-Sent Events",
+    ],
+    codeLink: "https://github.com/ammansoomro/db-mirror",
+    projectLink: "https://db-mirror.vercel.app",
+    cover: "/works/db-mirror-1.png",
+    screenshots: [
+      "/works/db-mirror-1.png",
+      "/works/db-mirror-2.png",
+      "/works/db-mirror-3.png",
+      "/works/db-mirror-4.png",
+    ],
+    category: "tool",
   },
   {
     title: "PR Analysis Dashboard",

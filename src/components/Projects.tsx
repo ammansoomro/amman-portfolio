@@ -16,6 +16,7 @@ const swatchColors = ["#663af3", "#e46d4c", "#027dea", "#269684"];
 const CATEGORY_LABELS: Record<ProjectCategory, string> = {
   extension: "Extension",
   "mini-app": "Mini App",
+  tool: "Tool",
 };
 
 function CategoryBadge({ category }: { category?: ProjectCategory }) {

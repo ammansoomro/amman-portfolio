@@ -1016,6 +1016,11 @@ img {
   color: #5ab6f5;
 }
 
+.project-badge-tool {
+  border-color: rgba(38, 150, 132, 0.4);
+  color: #4cc9af;
+}
+
 .archive {
   margin-top: var(--spacing-120);
   max-width: 880px;
