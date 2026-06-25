@@ -102,10 +102,6 @@ export default function Hero() {
           initial="hidden"
           animate="show"
         >
-          <motion.span variants={fadeUp} className="hero-badge">
-            <span className="hero-badge-dot" />
-            Open to opportunities
-          </motion.span>
           <motion.span variants={fadeUp} className="eyebrow">
             Software Engineer · Full Stack
           </motion.span>
