@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import Section from "./Section";
 import {
   projects,
@@ -24,6 +24,26 @@ function CategoryBadge({ category }: { category?: ProjectCategory }) {
   return <span className={`project-badge project-badge-${category}`}>{CATEGORY_LABELS[category]}</span>;
 }
 
+function ProjectLinks({ project }: { project: Project }) {
+  return (
+    <div className="project-links">
+      <a href={project.codeLink} target="_blank" rel="noopener noreferrer" className="project-link">
+        <GitHubIcon size={14} /> Source code
+      </a>
+      {project.projectLink && (
+        <a href={project.projectLink} target="_blank" rel="noopener noreferrer" className="project-link">
+          <ExternalLinkIcon /> Live demo
+        </a>
+      )}
+      {project.storeLink && (
+        <a href={project.storeLink} target="_blank" rel="noopener noreferrer" className="project-link">
+          <ChromeIcon /> Chrome Web Store
+        </a>
+      )}
+    </div>
+  );
+}
+
 function ProjectModal({
   project,
   onClose,
@@ -31,34 +51,22 @@ function ProjectModal({
   project: Project;
   onClose: () => void;
 }) {
+  const ref = useRef<HTMLDialogElement>(null);
+
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
+    ref.current?.showModal();
+  }, []);
 
   return (
-    <motion.div
+    <dialog
+      ref={ref}
       className="modal-overlay"
-      onClick={onClose}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      onClose={onClose}
+      onClick={(e) => {
+        if (e.target === ref.current) onClose();
+      }}
     >
-      <motion.div
-        className="modal"
-        onClick={(e) => e.stopPropagation()}
-        initial={{ opacity: 0, y: 24, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 24, scale: 0.98 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-      >
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose} aria-label="Close">
           <CloseIcon />
         </button>
@@ -71,44 +79,15 @@ function ProjectModal({
             </span>
           ))}
         </div>
-        <div className="project-links">
-          <a
-            href={project.codeLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-link"
-          >
-            <GitHubIcon size={14} /> Source code
-          </a>
-          {project.projectLink && (
-            <a
-              href={project.projectLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-link"
-            >
-              <ExternalLinkIcon /> Live demo
-            </a>
-          )}
-          {project.storeLink && (
-            <a
-              href={project.storeLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-link"
-            >
-              <ChromeIcon /> Chrome Web Store
-            </a>
-          )}
-        </div>
+        <ProjectLinks project={project} />
         <div className="modal-gallery">
           {project.screenshots.map((src) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img key={src} src={src} alt={`${project.title} screenshot`} loading="lazy" />
           ))}
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </dialog>
   );
 }
 
@@ -149,36 +128,7 @@ function FeaturedShowcase({
           </span>
         )}
       </div>
-      <div className="project-links">
-        <a
-          href={project.codeLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="project-link"
-        >
-          <GitHubIcon size={14} /> Source code
-        </a>
-        {project.projectLink && (
-          <a
-            href={project.projectLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-link"
-          >
-            <ExternalLinkIcon /> Live demo
-          </a>
-        )}
-        {project.storeLink && (
-          <a
-            href={project.storeLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-link"
-          >
-            <ChromeIcon /> Chrome Web Store
-          </a>
-        )}
-      </div>
+      <ProjectLinks project={project} />
       <button className="showcase-frame" onClick={onOpen}>
         <span className="anno-chip anno-chip-tl">
           <span className="anno-swatches">
@@ -306,11 +256,9 @@ export default function Projects() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {selected && (
-          <ProjectModal project={selected} onClose={() => setSelected(null)} />
-        )}
-      </AnimatePresence>
+      {selected && (
+        <ProjectModal project={selected} onClose={() => setSelected(null)} />
+      )}
     </Section>
   );
 }

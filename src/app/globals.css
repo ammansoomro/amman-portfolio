@@ -1283,12 +1283,25 @@ a.xp-company:hover .xp-company-arrow {
   position: fixed;
   inset: 0;
   z-index: 100;
+  margin: 0;
+  border: none;
   background: rgba(5, 6, 15, 0.82);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: var(--spacing-24);
+  max-width: none;
+  max-height: none;
+  color: inherit;
+}
+
+.modal-overlay[open] {
+  display: flex;
+}
+
+.modal-overlay::backdrop {
+  display: none;
 }
 
 .modal {
