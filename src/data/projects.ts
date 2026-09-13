@@ -73,29 +73,6 @@ export const projects: Project[] = [
     category: "extension",
   },
   {
-    title: "Jira Quick Logger",
-    description:
-      "A Chrome extension that fills your Jira Log Work form's Stage of Introduction, Description, and Fix Versions from your saved defaults, so you only ever type Time Spent. Detects Jira's own Log Work dialog via a MutationObserver and label-text matching — not brittle CSS classes — so it survives Jira version and theme differences, and re-runs on every DOM mutation to keep working across issue navigation and modal close/reopen. Supports multi-value Fix Versions across both native selects and chip-based pickers, and never touches Time Spent, validation, or submission — Jira's own form is left untouched. Defaults live only in chrome.storage.sync: no account, no network requests, no analytics. Toggle auto-fill anytime from the toolbar popup. Published on the Chrome Web Store, with a static marketing landing page built with Next.js 15 and Tailwind CSS.",
-    tags: ["Extension", "Next"],
-    technologies: [
-      "JavaScript",
-      "Chrome Extension (Manifest V3)",
-      "HTML5",
-      "CSS3",
-      "Next.js 15",
-      "React 19",
-      "Tailwind CSS",
-      "lucide-react",
-    ],
-    codeLink: "https://github.com/ammansoomro/jira-logger",
-    projectLink: "https://jira-logger-landing.vercel.app/",
-    storeLink:
-      "https://chromewebstore.google.com/detail/ihffbbpagemhcgomggjahhpondilabok",
-    cover: "/works/JIRA-Logger.png",
-    screenshots: ["/works/JIRA-Logger.png"],
-    category: "extension",
-  },
-  {
     title: "PR Analysis Dashboard",
     description:
       "A comprehensive full-stack web application designed as an in-house tool to help development teams monitor and gain deep insights into their pull request workflows, code quality, and team collaboration patterns. Built with modern web technologies, this dashboard transforms raw GitHub and Bitbucket PR data into actionable intelligence through intuitive visualizations, AI-powered analysis, and detailed reporting capabilities. Features multi-platform integration (GitHub OAuth and Bitbucket), comprehensive PR analysis with defect tracking and categorization, team collaboration insights with reviewer analytics, AI-powered insights using OpenAI GPT-4o-mini for natural language analysis, advanced filtering and search capabilities, detailed PR views with defect management, and interactive visualizations powered by Recharts.",
@@ -133,6 +110,29 @@ export const projects: Project[] = [
       "/works/PR-Analysis-Dashboard-8.jpg",
       "/works/PR-Analysis-Dashboard-9.jpg",
     ],
+  },
+  {
+    title: "Jira Quick Logger",
+    description:
+      "A Chrome extension that fills your Jira Log Work form's Stage of Introduction, Description, and Fix Versions from your saved defaults, so you only ever type Time Spent. Detects Jira's own Log Work dialog via a MutationObserver and label-text matching — not brittle CSS classes — so it survives Jira version and theme differences, and re-runs on every DOM mutation to keep working across issue navigation and modal close/reopen. Supports multi-value Fix Versions across both native selects and chip-based pickers, and never touches Time Spent, validation, or submission — Jira's own form is left untouched. Defaults live only in chrome.storage.sync: no account, no network requests, no analytics. Toggle auto-fill anytime from the toolbar popup. Published on the Chrome Web Store, with a static marketing landing page built with Next.js 15 and Tailwind CSS.",
+    tags: ["Extension", "Next"],
+    technologies: [
+      "JavaScript",
+      "Chrome Extension (Manifest V3)",
+      "HTML5",
+      "CSS3",
+      "Next.js 15",
+      "React 19",
+      "Tailwind CSS",
+      "lucide-react",
+    ],
+    codeLink: "https://github.com/ammansoomro/jira-logger",
+    projectLink: "https://jira-logger-landing.vercel.app/",
+    storeLink:
+      "https://chromewebstore.google.com/detail/ihffbbpagemhcgomggjahhpondilabok",
+    cover: "/works/JIRA-Logger.png",
+    screenshots: ["/works/JIRA-Logger.png"],
+    category: "extension",
   },
   {
     title: "DB Mirror — Web Edition",
