@@ -2,18 +2,18 @@ import { links } from "@/data/experience";
 import { GitHubIcon } from "./Icons";
 
 const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Work", href: "#work" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/#about" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Work", href: "/#work" },
+  { label: "Skills", href: "/#skills" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
   return (
     <header className="nav">
       <div className="nav-inner">
-        <a href="#home" className="nav-brand" aria-label="Amman Soomro — home">
+        <a href="/#home" className="nav-brand" aria-label="Amman Soomro — home">
           A<span>.</span>
         </a>
         <nav className="nav-links">

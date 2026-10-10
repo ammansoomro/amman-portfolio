@@ -1,14 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import Section from "./Section";
-import {
-  projects,
-  type Project,
-  type ProjectCategory,
-} from "@/data/projects";
-import { ChromeIcon, CloseIcon, ExternalLinkIcon, GitHubIcon } from "./Icons";
+import { projects, type Project, type ProjectCategory } from "@/data/projects";
+import { ChromeIcon, ExternalLinkIcon, GitHubIcon } from "./Icons";
 
 const FEATURED_COUNT = 3;
 const swatchColors = ["#663af3", "#e46d4c", "#027dea", "#269684"];
@@ -44,62 +40,7 @@ function ProjectLinks({ project }: { project: Project }) {
   );
 }
 
-function ProjectModal({
-  project,
-  onClose,
-}: {
-  project: Project;
-  onClose: () => void;
-}) {
-  const ref = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    ref.current?.showModal();
-  }, []);
-
-  return (
-    <dialog
-      ref={ref}
-      className="modal-overlay"
-      onClose={onClose}
-      onClick={(e) => {
-        if (e.target === ref.current) onClose();
-      }}
-    >
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose} aria-label="Close">
-          <CloseIcon />
-        </button>
-        <h3 className="modal-title">{project.title}</h3>
-        <p className="modal-desc">{project.description}</p>
-        <div className="tech-row">
-          {project.technologies.map((tech) => (
-            <span key={tech} className="tech-chip">
-              {tech}
-            </span>
-          ))}
-        </div>
-        <ProjectLinks project={project} />
-        <div className="modal-gallery">
-          {project.screenshots.map((src) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={src} src={src} alt={`${project.title} screenshot`} loading="lazy" />
-          ))}
-        </div>
-      </div>
-    </dialog>
-  );
-}
-
-function FeaturedShowcase({
-  project,
-  index,
-  onOpen,
-}: {
-  project: Project;
-  index: number;
-  onOpen: () => void;
-}) {
+function FeaturedShowcase({ project, index }: { project: Project; index: number }) {
   return (
     <motion.article
       className="showcase-item"
@@ -129,7 +70,7 @@ function FeaturedShowcase({
         )}
       </div>
       <ProjectLinks project={project} />
-      <button className="showcase-frame" onClick={onOpen}>
+      <Link href={`/projects/${project.slug}`} className="showcase-frame">
         <span className="anno-chip anno-chip-tl">
           <span className="anno-swatches">
             {swatchColors.slice(0, project.tags.length + 1).map((color) => (
@@ -150,17 +91,14 @@ function FeaturedShowcase({
           loading={index === 0 ? "eager" : "lazy"}
         />
         <span className="anno-chip anno-chip-br">
-          View {project.screenshots.length}{" "}
-          {project.screenshots.length === 1 ? "screen" : "screens"} →
+          View case study →
         </span>
-      </button>
+      </Link>
     </motion.article>
   );
 }
 
 export default function Projects() {
-  const [selected, setSelected] = useState<Project | null>(null);
-
   const featured = projects.slice(0, FEATURED_COUNT);
   const rest = projects.slice(FEATURED_COUNT);
 
@@ -176,12 +114,7 @@ export default function Projects() {
     >
       <div className="showcase">
         {featured.map((project, i) => (
-          <FeaturedShowcase
-            key={project.title}
-            project={project}
-            index={i}
-            onOpen={() => setSelected(project)}
-          />
+          <FeaturedShowcase key={project.slug} project={project} index={i} />
         ))}
       </div>
 
@@ -191,19 +124,7 @@ export default function Projects() {
         </div>
         <div className="archive-list">
           {rest.map((project, i) => (
-            <div
-              key={project.title}
-              className="archive-row"
-              role="button"
-              tabIndex={0}
-              onClick={() => setSelected(project)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setSelected(project);
-                }
-              }}
-            >
+            <Link key={project.slug} href={`/projects/${project.slug}`} className="archive-row">
               <span className="archive-num">
                 {String(FEATURED_COUNT + i + 1).padStart(2, "0")}
               </span>
@@ -251,14 +172,10 @@ export default function Projects() {
                 )}
                 <span className="archive-arrow">→</span>
               </span>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
-
-      {selected && (
-        <ProjectModal project={selected} onClose={() => setSelected(null)} />
-      )}
     </Section>
   );
 }

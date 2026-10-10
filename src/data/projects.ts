@@ -1,6 +1,12 @@
 export type ProjectCategory = "extension" | "mini-app" | "tool";
 
+export interface ProjectFeature {
+  title: string;
+  description: string;
+}
+
 export interface Project {
+  slug: string;
   title: string;
   description: string;
   tags: string[];
@@ -11,9 +17,19 @@ export interface Project {
   cover: string;
   screenshots: string[];
   category?: ProjectCategory;
+  overview: string;
+  problem: string;
+  solution: string;
+  features: ProjectFeature[];
+  challenges?: ProjectFeature[];
+  outcomes?: string[];
 }
 
-export const projects: Project[] = [
+function slugify(title: string): string {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+const rawProjects: Omit<Project, "slug">[] = [
   {
     title: "Wealth Deck",
     description:
@@ -43,6 +59,46 @@ export const projects: Project[] = [
       "/works/wealth-deck/screenshot-2.png",
       "/works/wealth-deck/screenshot-3.png",
     ],
+    overview:
+      "Wealth Deck tracks an investor's full net worth in one place: cryptocurrencies, PSX stocks, mutual funds, physical silver holdings, and Voluntary Pension Scheme (VPS) funds — with a single portfolio overview instead of five disconnected spreadsheets.",
+    problem:
+      "Tracking a diversified portfolio across crypto exchanges, brokerage statements, and physical assets usually means juggling spreadsheets that go stale the moment a price moves.",
+    solution:
+      "I built a Prisma/PostgreSQL schema that models each asset class on its own terms, then layered a React + Vite frontend on top with automatic crypto price updates from the CoinGecko API and Recharts-driven visualizations for allocation and performance.",
+    features: [
+      {
+        title: "Multi-asset tracking",
+        description:
+          "Crypto (BTC, ETH, SOL, XRP and more), PSX stocks, mutual funds, silver (bars, coins, tola), and VPS funds, each with asset-specific fields.",
+      },
+      {
+        title: "Real-time portfolio overview",
+        description:
+          "Interactive charts, profit/loss tracking, and an asset breakdown with performance metrics that update as prices change.",
+      },
+      {
+        title: "Planning tools",
+        description:
+          "Salary allocation planner, investment calculator, and SIP calculator to model contributions before committing capital.",
+      },
+      {
+        title: "Automatic price sync",
+        description:
+          "Crypto prices refresh automatically via the CoinGecko API, keeping valuations current without manual entry.",
+      },
+    ],
+    challenges: [
+      {
+        title: "Modeling heterogeneous assets",
+        description:
+          "Crypto, equities, funds, and physical metals each have different valuation logic. I normalized them into a common portfolio-value abstraction in Prisma while preserving asset-specific detail views.",
+      },
+      {
+        title: "Keeping valuations live without hammering APIs",
+        description:
+          "Crypto prices are cached and refreshed on an interval via the CoinGecko API rather than fetched per-request, keeping the dashboard responsive.",
+      },
+    ],
   },
   {
     title: "GitHub Defect Marker",
@@ -71,6 +127,43 @@ export const projects: Project[] = [
       "/works/github-defect-marker/screenshot-3.png",
     ],
     category: "extension",
+    overview:
+      "GitHub Defect Marker adds a structured defect-classification workflow directly into GitHub's PR comment box, so review feedback is consistent and machine-readable without reviewers changing how they write comments.",
+    problem:
+      "Review comments calling out defects were free text with no consistent severity or category, making it hard to track defect trends across a team.",
+    solution:
+      "A content script injects a 'Mark as Defect' control into GitHub's native comment box. Reviewers pick a severity (Major, Minor, Cosmetic) and defect type via one-click pills, and the extension inserts a label like #Major:Missing at the start of the comment — blocking submission until the label is complete.",
+    features: [
+      {
+        title: "One-click severity and type pills",
+        description:
+          "Severity (Major, Minor, Cosmetic) and defect type (Missing, Extra, Risk-prone, Ambiguous, Inconsistent, Improvement, Factually Incorrect) selected via pills.",
+      },
+      {
+        title: "Submission gating",
+        description: "Comment submission is blocked until a complete, machine-readable label is present.",
+      },
+      {
+        title: "Live label preview",
+        description: "A preview chip shows the exact label that will be inserted before it's committed.",
+      },
+      {
+        title: "Native GitHub theming",
+        description: "Styled with GitHub's own Primer CSS variables, supporting light, dark, dark-dimmed, and high-contrast themes.",
+      },
+      {
+        title: "Zero data collection",
+        description: "No background worker, no network requests, no storage, and zero Chrome permissions beyond the content script.",
+      },
+    ],
+    challenges: [
+      {
+        title: "Working within GitHub's DOM without breaking it",
+        description:
+          "The extension has to inject into GitHub's live comment box without a background worker or network permissions, so detection and insertion rely entirely on scoped DOM observation within the content script.",
+      },
+    ],
+    outcomes: ["Published on the Chrome Web Store."],
   },
   {
     title: "PR Analysis Dashboard",
@@ -110,6 +203,37 @@ export const projects: Project[] = [
       "/works/pr-analysis-dashboard/screenshot-9.jpg",
       "/works/pr-analysis-dashboard/screenshot-10.jpg",
     ],
+    overview:
+      "Built at Matrix Systems as an in-house monitoring tool, this dashboard pulls pull-request data from GitHub and Bitbucket and turns it into actionable intelligence for engineering leads: defect trends, reviewer load, and collaboration patterns.",
+    problem:
+      "PR history lived scattered across GitHub and Bitbucket with no unified view of defect rates, review turnaround, or team collaboration health.",
+    solution:
+      "I built OAuth integrations for both GitHub and Bitbucket, a Prisma/MySQL pipeline to normalize and store PR data, and an OpenAI GPT-4o-mini powered analysis layer that summarizes patterns in natural language alongside Recharts visualizations.",
+    features: [
+      {
+        title: "Multi-platform integration",
+        description: "GitHub OAuth and Bitbucket integration unify PR history from both platforms in one dashboard.",
+      },
+      {
+        title: "Defect tracking and categorization",
+        description: "Comprehensive PR analysis with defect tracking and categorization across review cycles.",
+      },
+      {
+        title: "Reviewer analytics",
+        description: "Team collaboration insights surface reviewer load and response patterns.",
+      },
+      {
+        title: "AI-powered insights",
+        description: "OpenAI GPT-4o-mini generates natural-language analysis of PR trends and code quality signals.",
+      },
+    ],
+    challenges: [
+      {
+        title: "Normalizing two PR data models",
+        description:
+          "GitHub and Bitbucket expose pull requests differently. I designed a shared Prisma schema that both OAuth integrations map into, so the rest of the app is platform-agnostic.",
+      },
+    ],
   },
   {
     title: "Jira Quick Logger",
@@ -133,6 +257,31 @@ export const projects: Project[] = [
     cover: "/works/jira-quick-logger/screenshot-1.png",
     screenshots: ["/works/jira-quick-logger/screenshot-1.png"],
     category: "extension",
+    overview:
+      "A small extension that removes the repetitive part of logging Jira work: Stage of Introduction, Description, and Fix Versions are filled from saved defaults, leaving only Time Spent for the user to type.",
+    problem:
+      "Logging work in Jira means re-typing the same Stage of Introduction, Description, and Fix Versions values dozens of times a week.",
+    solution:
+      "A content script detects Jira's Log Work dialog via a MutationObserver and label-text matching rather than brittle CSS classes, so it keeps working across Jira version and theme changes, and re-runs on every DOM mutation to survive modal close/reopen and issue navigation.",
+    features: [
+      {
+        title: "Auto-fill from saved defaults",
+        description: "Stage of Introduction, Description, and Fix Versions filled automatically; only Time Spent needs typing.",
+      },
+      {
+        title: "Multi-value Fix Versions",
+        description: "Supports both native selects and chip-based pickers for Fix Versions.",
+      },
+      {
+        title: "Resilient detection",
+        description: "Label-text matching via MutationObserver instead of CSS classes, surviving Jira version and theme differences.",
+      },
+      {
+        title: "Local-only storage",
+        description: "Defaults live only in chrome.storage.sync — no account, no network requests, no analytics.",
+      },
+    ],
+    outcomes: ["Published on the Chrome Web Store."],
   },
   {
     title: "DB Mirror — Web Edition",
@@ -160,6 +309,45 @@ export const projects: Project[] = [
       "/works/db-mirror/screenshot-4.png",
     ],
     category: "tool",
+    overview:
+      "DB Mirror compares two SQL Server databases — schema and data — through a guided Connect → Databases → Tables → Compare flow, streaming per-table results as they complete instead of blocking on one giant comparison job.",
+    problem:
+      "The original DB Mirror was a PyQt6 desktop tool. A web rewrite needed to match its correctness guarantees (real primary keys, type-aware diffs) while staying read-only and safe to point at production credentials.",
+    solution:
+      "The stateless comparison engine discovers base tables on both sides, diffs INFORMATION_SCHEMA.COLUMNS for schema differences, and for data diffs looks up the real primary key from INFORMATION_SCHEMA.KEY_COLUMN_USAGE to match rows — falling back to a multiset diff on the normalized row when no PK exists. Every value is normalized to a string (dates to ISO, buffers to hex) so type coercion never produces a false positive, and each table's result streams over Server-Sent Events as it finishes.",
+    features: [
+      {
+        title: "Guided four-step flow",
+        description: "Connect → Databases → Tables → Compare, with live streaming progress per table.",
+      },
+      {
+        title: "Schema and data diff",
+        description: "Schema diff over INFORMATION_SCHEMA.COLUMNS plus a per-table data diff keyed on the real primary key.",
+      },
+      {
+        title: "Safe by construction",
+        description: "Strictly read-only; identifiers are bracket-escaped, values use bound parameters, and credentials are never persisted.",
+      },
+      {
+        title: "Exports",
+        description: "Reports export to self-contained HTML, CSV, or JSON.",
+      },
+      {
+        title: "Demo mode",
+        description: "Explore the full UI without a live database connection.",
+      },
+    ],
+    challenges: [
+      {
+        title: "Avoiding false positives from type coercion",
+        description:
+          "1 vs 1.0 or a date in two different formats should never register as a difference. Every compared value is normalized to a canonical string representation before comparison.",
+      },
+      {
+        title: "Large tables",
+        description: "Tables over 100k rows are flagged as sampled rather than silently truncated, so results stay honest about coverage.",
+      },
+    ],
   },
   {
     title: "Cluedo Companion",
@@ -180,6 +368,32 @@ export const projects: Project[] = [
     cover: "/works/cluedo-companion/screenshot-1.png",
     screenshots: ["/works/cluedo-companion/screenshot-1.png"],
     category: "mini-app",
+    overview:
+      "Cluedo Companion replaces the paper notes sheet with a live deduction grid: as players mark cards, the board analyzes who can be eliminated and flags the answer once a category narrows to one candidate.",
+    problem:
+      "Paper Cluedo notes sheets don't do any deduction for you — players have to manually cross-reference every mark.",
+    solution:
+      "Each grid cell cycles through five states (check, cross, maybe, self-held) across 2-6 renamable player columns. The board is analyzed live: any card held by a player is eliminated from the murder envelope, and each category shows its remaining candidates with a completion meter tracking overall progress.",
+    features: [
+      {
+        title: "Interactive deduction grid",
+        description: "Five-state cells across 2-6 renamable player columns, with per-card notes.",
+      },
+      {
+        title: "Live board analysis",
+        description:
+          "Cards held by any player are automatically eliminated from the envelope; a category is flagged solved once exactly one candidate remains.",
+      },
+      {
+        title: "Persistent case files",
+        description:
+          "Multiple investigations saved to localStorage via Zustand persist, each shareable through a compact URL-safe encoded link.",
+      },
+      {
+        title: "Detective-themed UI",
+        description: "Cinzel, Cormorant Garamond, and Special Elite typography with Framer Motion animations and optional sound effects.",
+      },
+    ],
   },
   {
     title: "Prompt-O-Phobia",
@@ -194,6 +408,21 @@ export const projects: Project[] = [
       "/works/prompt-o-phobia/screenshot-1.png",
       "/works/prompt-o-phobia/screenshot-2.png",
       "/works/prompt-o-phobia/screenshot-3.png",
+    ],
+    overview:
+      "Prompt-O-Phobia is a Next.js platform for crafting and sharing structured prompts for AI interaction.",
+    problem: "Good prompts are often one-off and hard to reuse or share in a structured way.",
+    solution:
+      "Built a Next.js and TypeScript frontend for composing, saving, and sharing prompts, styled with Tailwind CSS.",
+    features: [
+      {
+        title: "Prompt composition",
+        description: "A focused interface for shaping prompts for AI interaction.",
+      },
+      {
+        title: "Sharing",
+        description: "Share crafted prompts with others on the platform.",
+      },
     ],
   },
   {
@@ -211,6 +440,16 @@ export const projects: Project[] = [
       "/works/arcade-vault/screenshot-4.png",
       "/works/arcade-vault/screenshot-5.png",
       "/works/arcade-vault/screenshot-6.png",
+    ],
+    overview:
+      "Arcade Vault is an experimental gaming e-commerce storefront where users browse and purchase controllers, consoles, games, and headsets.",
+    problem: "The project started as a focused exploration of Stripe Payments integration.",
+    solution:
+      "Built a React/Vite storefront backed by an Express and MongoDB API, integrating Stripe for checkout and later expanding to Multer for file uploads as the scope grew.",
+    features: [
+      { title: "Stripe checkout", description: "End-to-end payment processing for cart purchases." },
+      { title: "File uploads via Multer", description: "Product image uploads handled through Multer middleware." },
+      { title: "Product catalog", description: "Browse controllers, consoles, games, and headsets." },
     ],
   },
   {
@@ -238,6 +477,14 @@ export const projects: Project[] = [
       "/works/moviebase/screenshot-3.png",
       "/works/moviebase/screenshot-4.png",
     ],
+    overview: "Moviebase recreates the YTS browsing experience in React, backed entirely by the public YTS API.",
+    problem: "Wanted a cleaner, faster interface for browsing YTS's torrent catalog.",
+    solution:
+      "Built a React SPA with styled-components and react-router-dom, using @splidejs/react-splide for carousels and framer-motion for transitions, consuming the YTS API directly.",
+    features: [
+      { title: "Browse and search", description: "Search and filter the YTS movie catalog." },
+      { title: "Torrent downloads", description: "Direct access to torrent links exposed by the YTS API." },
+    ],
   },
   {
     title: "Shadow Sensei",
@@ -254,5 +501,18 @@ export const projects: Project[] = [
       "/works/shadow-sensei/screenshot-4.jpg",
       "/works/shadow-sensei/screenshot-5.jpg",
     ],
+    overview: "Shadow Sensei is a student management system for storing and organizing student and course records.",
+    problem: "Needed a straightforward system for tracking students and the courses they're enrolled in.",
+    solution: "Built a classic PHP/MySQL CRUD application with an HTML/CSS/JavaScript frontend.",
+    features: [
+      { title: "Student records", description: "Store and manage student data." },
+      { title: "Course tracking", description: "Associate students with their enrolled courses." },
+    ],
   },
 ];
+
+export const projects: Project[] = rawProjects.map((p) => ({ ...p, slug: slugify(p.title) }));
+
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((p) => p.slug === slug);
+}
